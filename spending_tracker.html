@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Budget Brain</title>
+  <link rel="icon" type="image/png" href="logo fav.png">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+      background-image: url('https://img.freepik.com/free-photo/blank-paper-with-coffee-cup-table_23-2148036912.jpg'); 
+      background-size: cover;
+      padding-top: 100px; /* Ensures space below navbar */
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 470px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+    }
+
+    h2 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px; 
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #000000;
+      font-weight: bold; 
+    }
+
+    input[type="date"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      font-size: 16px; 
+      box-sizing: border-box; 
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); 
+    }
+
+    button {
+      background-color: #007bff; 
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s ease; 
+      font-size: 16px; 
+    }
+
+    button:hover {
+      background-color: #0069d9; 
+    }
+
+    button:active {
+      transform: scale(0.95); 
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+      border-spacing: 5px; 
+      border: 1px solid #ccc; 
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    .total-amount {
+      font-weight: bold;
+      margin-top: 10px;
+      color: #007bff; 
+      font-size: 18px; 
+    }
+
+     /* Navbar Styling */
+     .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 50px;
+            background-color: rgba(80, 131, 131, 0.9);
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .navbar .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .navbar .logo span {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 5px;
+            padding-right: 30px;
+            flex-wrap: wrap;
+        }
+
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .navbar .nav-links a:hover {
+            background-color: rgba(104, 145, 145, 0.8);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 15px 20px;
+            }
+
+            .navbar .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 15px 0;
+            }
+
+            .navbar .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 12px;
+            }
+        }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">
+        <img src="logo.png" alt="Logo" />
+        <span>Budget Brain</span>
+    </div>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+    </nav>
+</header>
+
+  <div class="container">
+
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date"><br><br>
+
+    <label for="amount">Amount (₹):</label>
+    <input type="number" id="amount" name="amount"><br><br>
+
+    <label for="category">Category:</label>
+    <select id="category">
+        <option value="Select Category">Select Category</option> 
+      <option value="groceries">Groceries</option>
+      <option value="rent">Rent</option>
+      <option value="transportation">Transportation</option>
+      <option value="entertainment">Entertainment</option>
+      <option value="dining">Dining</option>
+      <option value="shopping">Shopping</option>
+      <option value="bills">Bills</option>
+      <option value="other">Other</option>
+    </select><br><br>
+
+    <label for="payment">Payment Method:</label>
+    <select id="payment">
+      <option value="cash">Cash</option>
+      <option value="credit">Credit Card</option>
+      <option value="debit">Debit Card</option>
+      <option value="bank_transfer">Bank Transfer</option>
+      <option value="mobile_payment">Mobile Payment</option>
+    </select><br><br>
+
+    <button onclick="addExpense()">Add Expense</button>
+
+    <h3>Expense History</h3>
+    <table id="expenseTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Amount (₹)</th>
+          <th>Category</th>
+          <th>Payment</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <div id="totalExpenses"></div>
+
+  </div>
+
+  <script>
+    const expenseTable = document.getElementById('expenseTable').getElementsByTagName('tbody')[0];
+    const totalExpensesElement = document.getElementById('totalExpenses');
+    let expenses = []; 
+
+    function addExpense() {
+      const date = document.getElementById('date').value;
+      const amount = parseFloat(document.getElementById('amount').value);
+      const category = document.getElementById('category').value;
+      const payment = document.getElementById('payment').value;
+
+      if (isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid amount.");
+        return;
+      }
+
+      const expense = { date, amount, category, payment };
+      expenses.push(expense);
+      displayExpenses();
+      calculateAndDisplayTotals(); 
+
+      document.getElementById('date').value = '';
+      document.getElementById('amount').value = '';
+    }
+
+    function displayExpenses() {
+      expenseTable.innerHTML = ''; 
+      expenses.forEach(expense => {
+        let newRow = expenseTable.insertRow();
+        newRow.innerHTML = `<td>${expense.date}</td><td>₹${expense.amount.toFixed(2)}</td><td>${expense.category}</td><td>${expense.payment}</td>`;
+      });
+    }
+
+    function calculateAndDisplayTotals() {
+      let totalExpenses = expenses.reduce((total, expense) => total + expense.amount, 0);
+      totalExpensesElement.innerHTML = `<p class="total-amount">Total Expenses: ₹${totalExpenses.toFixed(2)}</p>`;
+    }
+  </script>
+
+</body>
+</html>

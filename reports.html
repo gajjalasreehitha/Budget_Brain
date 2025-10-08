@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Brain</title>
+    <link rel="icon" type="image/png" href="logo fav.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;padding-top: 100px; /* Ensures space below navbar */
+      min-height: 100vh;
+      background-color: #f0f0f0;
+      background-image: url('https://media.istockphoto.com/id/1341538285/photo/being-organased-saves-tame.jpg?s=612x612&w=0&k=20&c=ehbqjNdMXx_jHOmsptytSVEpDuKXm5m-mGKN5oxG8dQ='); 
+      background-size: cover;
+          }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(50px);
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .header h2 {
+            color: #34404d;
+        }
+
+        .summary {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            padding: 20px;
+            border-radius: 10px;
+            width: 22%;
+            text-align: center;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-box h3 {
+            color: #007bff;
+            margin: 0;
+        }
+
+        .stat-box p {
+            font-size: 24px;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        /* Charts Section */
+        .charts {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .chart-container {
+            width: 48%;
+            padding: 15px;
+           
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(50px);
+        }
+
+        /* Transaction Table */
+        .transaction-table {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(50px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #b4c0ce;
+            color: white;
+        }
+
+
+         /* Navbar Styling */
+     .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 50px;
+            background-color: rgba(80, 131, 131, 0.9);
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .navbar .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .navbar .logo span {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 5px;
+            padding-right: 30px;
+            flex-wrap: wrap;
+        }
+
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .navbar .nav-links a:hover {
+            background-color: rgba(104, 145, 145, 0.8);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 15px 20px;
+            }
+
+            .navbar .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 15px 0;
+            }
+
+            .navbar .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 12px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+
+  <header class="navbar">
+    <div class="logo">
+        <img src="logo.png" alt="Logo" />
+        <span>Budget Brain</span>
+    </div>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+    </nav>
+</header>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h2>Budget Brain - Finance Dashboard</h2>
+            <p>📅 March 2025</p>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="summary">
+            <p>Hi Jane,</p>
+            <p>Your finances are on track! Below is a summary of your budget, savings, and spending progress.</p>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats">
+            <div class="stat-box">
+                <h3>Total Savings</h3>
+                <p>₹8,75,000</p>
+            </div>
+            <div class="stat-box">
+                <h3>Avg. Spending</h3>
+                <p>₹2,50,000</p>
+            </div>
+            <div class="stat-box">
+                <h3>Investments</h3>
+                <p>₹5,10,000</p>
+            </div>
+            <div class="stat-box">
+                <h3>Net Worth</h3>
+                <p>₹52,00,000</p>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts">
+            <div class="chart-container">
+                <h3>Spending Over Time</h3>
+                <canvas id="lineChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Expense Breakdown</h3>
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Transaction Table -->
+        <div class="transaction-table">
+            <h3>Recent Transactions</h3>
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>Mar 20, 2025</td>
+                    <td>Groceries</td>
+                    <td>₹7,500</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>Mar 18, 2025</td>
+                    <td>Rent</td>
+                    <td>₹30,000</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>Mar 15, 2025</td>
+                    <td>Entertainment</td>
+                    <td>₹3,000</td>
+                    <td>Pending</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Line Chart (Spending Over Time)
+        var ctx1 = document.getElementById('lineChart').getContext('2d');
+        var lineChart = new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Spending (₹)',
+                    data: [150000, 180000, 200000, 250000, 220000, 190000],
+                    borderColor: '#007bff',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            }
+        });
+
+        // Pie Chart (Expense Breakdown)
+        var ctx2 = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: ['Rent', 'Groceries', 'Entertainment', 'Utilities', 'Other'],
+                datasets: [{
+                    data: [30000, 7500, 5000, 2000, 7000],
+                    backgroundColor: ['#007bff', '#28a745', '#ffc107', '#17a2b8', '#dc3545']
+                }]
+            }
+        });
+    </script>
+
+</body>
+</html>

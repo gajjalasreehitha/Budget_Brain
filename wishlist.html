@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Brain</title>
+    <link rel="icon" type="image/png" href="logo fav.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 100px; /* Ensures space below navbar */
+            background-image: url('https://plus.unsplash.com/premium_photo-1684581214880-2043e5bc8b8b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmxvZyUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D'); 
+            background-size:cover;
+            background-position: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #4a90e2;
+            margin-bottom: 20px;
+        }
+
+        /* Centering the Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 900px;
+            width: 100%;
+            min-height: 70vh;
+        }
+
+        .card {
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1 1 400px; /* Ensures equal width */
+            min-width: 300px;
+            transition: transform 0.2s ease-in-out;
+            text-align: center;
+            background-image: linear-gradient(to right, #dee3f5, rgba(80, 131, 131, 0.9));
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card ul li {
+            background: #eaf4fc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-bar {
+            background: #eaeaea;
+            border-radius: 5px;
+            height: 10px;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar .progress {
+            height: 100%;
+            background: #4caf50;
+            width: 0%;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .add-item {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .add-item input, .add-item button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            outline: none;
+        }
+
+        .add-item button {
+            background: #4a90e2;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .add-item button:hover {
+            background: #357ab7;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 50px;
+            background-color: rgba(80, 131, 131, 0.9);
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .navbar .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .navbar .logo span {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 5px;
+            padding-right: 30px;
+            flex-wrap: wrap;
+        }
+
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .navbar .nav-links a:hover {
+            background-color: rgba(104, 145, 145, 0.8);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 15px 20px;
+            }
+
+            .navbar .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 15px 0;
+            }
+
+            .navbar .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo" />
+            <span>Budget Brain</span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div class="card" id="wishlist">
+            <h2>Wishlist</h2>
+            <p>Track and prioritize items you desire.</p>
+            <ul id="wishlist-items"></ul>
+            <div class="add-item">
+                <input type="text" id="wishlist-input" placeholder="Add an item">
+                <input type="number" id="wishlist-cost" placeholder="Estimated cost">
+                <button onclick="addWishlistItem()">Add</button>
+            </div>
+        </div>
+
+        <div class="card" id="future-goals">
+            <h2>Future Goals</h2>
+            <p>Set and track your financial milestones.</p>
+            <ul id="goal-items"></ul>
+            <div class="add-item">
+                <input type="text" id="goal-input" placeholder="Set a financial goal">
+                <input type="number" id="goal-amount" placeholder="Target amount">
+                <input type="number" id="goal-progress" placeholder="Current savings">
+                <button onclick="addGoalItem()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addWishlistItem() {
+            const item = document.getElementById('wishlist-input').value;
+            const cost = document.getElementById('wishlist-cost').value;
+            if (item && cost) {
+                const ul = document.getElementById('wishlist-items');
+                const li = document.createElement('li');
+                li.innerHTML = `${item} <span>Cost: $${cost}</span>`;
+                ul.appendChild(li);
+                document.getElementById('wishlist-input').value = '';
+                document.getElementById('wishlist-cost').value = '';
+            }
+        }
+
+        function addGoalItem() {
+            const goal = document.getElementById('goal-input').value;
+            const amount = document.getElementById('goal-amount').value;
+            const progress = document.getElementById('goal-progress').value;
+            if (goal && amount && progress) {
+                const ul = document.getElementById('goal-items');
+                const li = document.createElement('li');
+                li.innerHTML = `${goal} <span>Saved: $${progress} / $${amount}</span>`;
+                ul.appendChild(li);
+                document.getElementById('goal-input').value = '';
+                document.getElementById('goal-amount').value = '';
+                document.getElementById('goal-progress').value = '';
+            }
+        }
+    </script>
+</body>
+</html>

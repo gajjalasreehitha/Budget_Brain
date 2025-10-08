@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" type="image/png" href="logo fav.png">
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="css.css">
+
+      <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+      <title>Budget Brain</title>
+
+      <style>
+         .google-login {
+            width: 100%;
+            background: #ffffff;
+            padding: 12px;
+            border: none;
+            border-radius: 4rem;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            text-align: center;
+         }
+   
+      
+      </style>
+
+   </head>
+   <body>
+      <div class="login">
+         <img src="https://media.licdn.com/dms/image/D4D12AQEsdHTPooazWg/article-cover_image-shrink_720_1280/0/1680026402782?e=2147483647&v=beta&t=4ZBUcwjPonr5Trfc2NUt_mHwFTqtRkJBOVjzRasOBSc" alt="image" class="login__bg">
+
+         <form action="" class="login__form">
+            <h1 class="login__title">Register Here!</h1>
+
+            <div class="login__inputs">
+               
+               
+
+                <div class="login__box">
+                    <input type="email" placeholder="Email ID" required class="login__input">
+                    <i class="ri-mail-fill"></i>
+                 </div>
+
+               <div class="login__box">
+                  <input type="password" placeholder="Password" required class="login__input">
+                  <i class="ri-lock-2-fill"></i>
+               </div>
+
+               <div class="login__box">
+                <input type="password" placeholder="Conform password" required class="login__input">
+                <i class="ri-lock-2-fill"></i>
+             </div>
+            </div>
+
+            <div class="login__check">
+               <div class="login__check-box">
+                  <input type="checkbox" class="login__check-input" id="user-check">
+                  <label for="user-check" class="login__check-label">Remember me</label>
+               </div>
+
+               <!-- <a href="#" class="login__forgot">Forgot Password?</a> -->
+            </div>
+
+            <!-- <a href="login.html"><button type="submit" class="login__button">Register Now</button></a> -->
+            <button type="button" class="login__button" onclick="window.location.href='login.html'">Register Now</button>
+
+            
+            <!--
+            <div class="login__register">
+               Don't have an account? <a href="#">Register</a>
+            </div>
+        -->
+
+         <!-- Google Sign-In Button -->
+         <div id="g_id_signin" class="google-login"></div>
+
+         </form>
+      </div>
+   </body>
+</html>
+<script src="script.js"></script>
+<script>  
+   function handleCredentialResponse(response) {
+         console.log("Google JWT Token: ", response.credential);
+
+         // Decode JWT to extract user info
+         let jwt = JSON.parse(atob(response.credential.split(".")[1]));
+         console.log("User Info:", jwt);
+
+         alert("Google Login Successful: " + jwt.email);
+         window.location.href = "index.html";
+      }
+
+      // Load Google Sign-In Button
+      window.onload = function () {
+         google.accounts.id.initialize({
+            client_id: "57733453890-qqio6bhr48icdgnmob6s65sfa5mi5taj.apps.googleusercontent.com",
+            callback: handleCredentialResponse
+         });
+
+         google.accounts.id.renderButton(
+            document.getElementById("g_id_signin"),
+            { theme: "outline", size: "large" }
+         );
+
+         google.accounts.id.prompt();
+      };
+   </script>
+
+
+</script>

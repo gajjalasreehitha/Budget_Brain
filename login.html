@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="icon" type="image/png" href="logo fav.png">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+   <link rel="stylesheet" href="css.css">
+   
+   <!-- Google Sign-In API -->
+   <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+   <title>Budget Brain</title>
+   
+
+   <style>
+      .error-message {
+         color: rgb(34, 34, 34);
+         font-size: 14px;
+         display: none;
+         margin-top: 5px;
+      }
+
+      .google-login {
+         width: 100%;
+         background: #ffffff;
+         
+         padding: 12px;
+         border: none;
+         border-radius: 100px;
+         font-size: 16px;
+         cursor: pointer;
+         transition: 0.3s;
+         margin-top: 10px;
+         text-align: center;
+      }
+
+   
+   </style>
+</head>
+<body>
+   <div class="login">
+      <img src="https://media.licdn.com/dms/image/D4D12AQEsdHTPooazWg/article-cover_image-shrink_720_1280/0/1680026402782?e=2147483647&v=beta&t=4ZBUcwjPonr5Trfc2NUt_mHwFTqtRkJBOVjzRasOBSc" 
+      alt="image" class="login__bg">
+
+      <form id="loginForm" class="login__form">
+         <h1 class="login__title">Login</h1>
+
+         <div class="login__inputs">
+            <div class="login__box">
+               <input type="email" id="email" placeholder="Email ID" class="login__input">
+               <i class="ri-mail-fill"></i>
+               <p class="error-message" id="emailError">Please enter a valid email!</p>
+            </div>
+
+            <div class="login__box">
+               <input type="password" id="password" placeholder="Password" class="login__input">
+               <i class="ri-lock-2-fill"></i>
+               <p class="error-message" id="passwordError">Please enter your password!</p>
+            </div>
+         </div>
+
+         <div class="login__check">
+            <div class="login__check-box">
+               <input type="checkbox" class="login__check-input" id="user-check">
+               <label for="user-check" class="login__check-label">Remember me</label>
+            </div>
+            <a href="#" class="login__forgot">Forgot Password?</a>
+         </div>
+
+         <button type="submit" class="login__button">Login</button>
+
+         
+
+         <div class="login__register">
+            Don't have an account? <a href="register.html">Register</a>
+         </div>
+      </form>
+   </div>
+
+   <script>
+      document.getElementById('loginForm').addEventListener('submit', function(event) {
+   event.preventDefault();
+
+   let email = document.getElementById('email').value.trim();
+   let password = document.getElementById('password').value.trim();
+   let emailError = document.getElementById('emailError');
+   let passwordError = document.getElementById('passwordError');
+
+   let valid = true;
+
+   // Email validation
+   if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      emailError.style.display = 'block';
+      valid = false;
+   } else {
+      emailError.style.display = 'none';
+   }
+
+   // Password validation
+   if (password.length < 6) {
+      passwordError.style.display = 'block';
+      valid = false;
+   } else {
+      passwordError.style.display = 'none';
+   }
+
+   // If both fields are valid, send data to PHP
+   if (valid) {
+      fetch('register.php', {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+         },
+         body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+      })
+      .then(response => response.text())
+      .then(data => {
+         alert(data); // Show PHP response
+         window.location.href = 'index.html'; // Redirect if needed
+      })
+      .catch(error => {
+         console.error('Error:', error);
+         alert('An error occurred. Please try again.');
+      });
+   }
+});
+
+         </script>
+
+</body>
+</html>

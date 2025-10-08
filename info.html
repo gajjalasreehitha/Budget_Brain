@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budgeting System – Manage Your Money Wisely</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: #f4f4f4;
+        }
+
+    
+
+        /* Hero Section */
+        .hero {
+            background:  rgba(80, 131, 131, 0.9);
+            color: white;
+            padding: 20px 20px;
+            margin-top: 0%;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+        }
+
+
+
+        /* Sections */
+        .section {
+            padding: 50px 20px;
+            background: white;
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section li {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            width: 200px;
+            background: #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+        }
+
+        .close-btn {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: red;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>💰Budgeting System – Manage Your Money Wisely</h1>
+    </section>
+
+    <!-- Why Budgeting is Important -->
+    <section class="section">
+        <h2>💡 Why It’s Important</h2>
+        <p>Without a budget, it’s easy to overspend and struggle financially. A good budget helps you:</p>
+        <ul>
+            <li>✔ Control unnecessary expenses</li>
+            <li>✔ Save for emergencies</li>
+            <li>✔ Achieve financial freedom</li>
+        </ul>
+    </section>
+
+    
+    </section>
+
+    <!-- Benefits -->
+    <section class="section">
+        <h2>📌 Benefits of Using Budget Brain</h2>
+        <p>Stay in control of your finances with these amazing benefits:</p>
+        <ul>
+            <li>✔ Avoid overspending</li>
+            <li>✔ Track every rupee</li>
+            <li>✔ Ensure financial stability</li>
+        </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Budget Brain. All rights reserved.</p>
+    </footer>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>ℹ️ About Budget Brain</h2>
+            <p>Budget Brain helps you manage your money, track expenses, and get AI-powered financial insights.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('infoBtn').addEventListener('click', function() {
+            document.getElementById('infoModal').style.display = 'block';
+        });
+
+        document.querySelector('.close-btn').addEventListener('click', function() {
+            document.getElementById('infoModal').style.display = 'none';
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('infoModal')) {
+                document.getElementById('infoModal').style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>

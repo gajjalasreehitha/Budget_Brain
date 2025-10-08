@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Brain</title>
+    <link rel="icon" type="image/png" href="logo fav.png">
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://img.freepik.com/premium-photo/businessman-hold-notepad-with-text-financial-planning-financial-charts-desktop-financial-business-concept_284815-2743.jpg');
+            background-size: cover;
+        }
+
+        /* Navbar Styling */
+        
+        .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 50px;
+    background-color: rgba(80, 131, 131, 0.9);
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    flex-wrap: wrap;
+}
+
+.navbar .logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar .logo img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.navbar .logo span {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 5px;
+    padding-right: 30px;
+    flex-wrap: wrap;
+}
+
+.navbar .nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.navbar .nav-links a:hover {
+    background-color: rgba(104, 145, 145, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 15px 20px;
+    }
+
+    .navbar .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 15px 0;
+    }
+
+    .navbar .nav-links a {
+        display: block;
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+
+        /* Form Container */
+        .container {
+    width: 470px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    text-align: center;
+    margin: 100px auto 20px;
+}
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #3e8e41;
+        }
+
+        #result {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+            .navbar .nav-links {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 10px;
+            }
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo" />
+            <span>Budget Brain</span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="info.html">Info</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Financial Details</h1>
+        <form id="financialForm">
+            <label for="monthlyIncome">Monthly Income</label>
+            <input type="number" id="monthlyIncome" placeholder="Enter monthly income" required>
+            
+            <label for="expenses">Recurring Expenses</label>
+            <input type="number" id="expenses" placeholder="Enter total recurring expenses" required>
+            
+            <label for="loans">Loan Amount</label>
+            <input type="number" id="loans" placeholder="Enter outstanding loan amount">
+            
+            <label for="loanEMI">Loan EMI</label>
+            <input type="number" id="loanEMI" placeholder="Enter monthly EMI">
+            
+            <label for="insurance">Insurance Premium</label>
+            <input type="number" id="insurance" placeholder="Enter monthly insurance premium">
+            
+            <label for="savings">Savings & Investments</label>
+            <input type="number" id="savings" placeholder="Enter savings and investments">
+            
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+        <div id="result">
+            <h2>Budget Summary</h2>
+            <p id="summaryText"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('financialForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value) || 0;
+            const expenses = parseFloat(document.getElementById('expenses').value) || 0;
+            const loans = parseFloat(document.getElementById('loans').value) || 0;
+            const loanEMI = parseFloat(document.getElementById('loanEMI').value) || 0;
+            const insurance = parseFloat(document.getElementById('insurance').value) || 0;
+            const savings = parseFloat(document.getElementById('savings').value) || 0;
+
+            const netIncome = monthlyIncome - expenses - loanEMI - insurance;
+            const savingsRate = monthlyIncome > 0 ? (savings / monthlyIncome) * 100 : 0;
+
+            document.getElementById('summaryText').innerHTML = `
+                <strong>Net Monthly Income:</strong> ₹${netIncome.toFixed(2)}<br>
+                <strong>Savings Rate:</strong> ${savingsRate.toFixed(2)}%
+            `;
+            
+            document.getElementById('result').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

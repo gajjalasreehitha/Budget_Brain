@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Budget Brain</title>
+  <link rel="icon" type="image/png" href="logo fav.png">
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+      background-image: url('https://media.istockphoto.com/id/1341538285/photo/being-organased-saves-tame.jpg?s=612x612&w=0&k=20&c=ehbqjNdMXx_jHOmsptytSVEpDuKXm5m-mGKN5oxG8dQ='); 
+      background-size: cover;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 600px; 
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(50px);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      background-color: #eee;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background-color: #4CAF50; 
+      border-radius: 5px;
+      width: 0%; /* Initially 0% progress */
+      transition: width 0.3s ease; 
+    }
+
+    .goal-container {
+      margin-bottom: 20px;
+    }
+
+    .goal-label {
+      font-weight: bold;
+    }
+
+    .goal-value {
+      margin-left: 10px;
+    }
+
+    .chart-container {
+      width: 100%;
+      height: 300px;
+      margin-top: 20px;
+    }
+
+
+     /* Navbar Styling */
+     .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 50px;
+            background-color: rgba(80, 131, 131, 0.9);
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .navbar .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .navbar .logo span {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 5px;
+            padding-right: 30px;
+            flex-wrap: wrap;
+        }
+
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .navbar .nav-links a:hover {
+            background-color: rgba(104, 145, 145, 0.8);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 15px 20px;
+            }
+
+            .navbar .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 15px 0;
+            }
+
+            .navbar .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 12px;
+            }
+        }
+    /* Optional: Add styles for charts (if using a library like Chart.js) */
+  </style>
+</head>
+
+<body>
+
+
+  <header class="navbar">
+    <div class="logo">
+        <img src="logo.png" alt="Logo" />
+        <span>Budget Brain</span>
+    </div>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+    </nav>
+</header>
+
+  <div class="container">
+    <h2>Finance Progress Tracker</h2>
+
+    <div class="goal-container">
+      <span class="goal-label">Savings Goal:</span> 
+      <span class="goal-value" id="savingsGoal">$10,000</span><br> 
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="savingsProgress"></div>
+      </div>
+    </div>
+
+    <div class="goal-container">
+      <span class="goal-label">Debt Reduction Goal:</span> 
+      <span class="goal-value" id="debtReductionGoal">$5,000</span><br> 
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="debtReductionProgress"></div>
+      </div>
+    </div>
+
+    <div class="goal-container">
+      <span class="goal-label">Investment Growth Goal:</span> 
+      <span class="goal-value" id="investmentGrowthGoal">$20,000</span><br> 
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="investmentGrowthProgress"></div>
+      </div>
+    </div>
+
+    <div class="goal-container">
+      <span class="goal-label">Net Worth Goal:</span> 
+      <span class="goal-value" id="netWorthGoal">$100,000</span><br> 
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="netWorthProgress"></div>
+      </div>
+    </div>
+
+    <div class="goal-container">
+      <span class="goal-label">Debt-to-Income Ratio Goal:</span> 
+      <span class="goal-value" id="debtToIncomeRatioGoal">30%</span><br> 
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="debtToIncomeRatioProgress"></div>
+      </div>
+    </div> 
+
+    <!-- <div class="chart-container">
+      <h3>Expense Breakdown Chart</h3>
+      <canvas id="expenseChart"></canvas> 
+    </div> -->
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+  <script>
+    // Sample data (replace with actual user data)
+    const savingsGoal = 10000;
+    const currentSavings = 5000; 
+    const debtReductionGoal = 5000;
+    const currentDebtReduction = 2000;
+    const investmentGrowthGoal = 20000;
+    const currentInvestmentGrowth = 12000;
+    const netWorthGoal = 100000; 
+    const currentNetWorth = 75000; 
+    const debtToIncomeRatioGoal = 0.3; 
+    const currentDebtToIncomeRatio = 0.25; 
+
+    // Calculate progress percentages
+    const savingsProgress = (currentSavings / savingsGoal) * 100;
+    const debtReductionProgress = (currentDebtReduction / debtReductionGoal) * 100;
+    const investmentGrowthProgress = (currentInvestmentGrowth / investmentGrowthGoal) * 100;
+    const netWorthProgress = (currentNetWorth / netWorthGoal) * 100; 
+    const debtToIncomeRatioProgress = (currentDebtToIncomeRatio / debtToIncomeRatioGoal) * 100; 
+
+    // Update progress bars
+    document.getElementById('savingsProgress').style.width = savingsProgress + '%';
+    document.getElementById('debtReductionProgress').style.width = debtReductionProgress + '%';
+    document.getElementById('investmentGrowthProgress').style.width = investmentGrowthProgress + '%';
+    document.getElementById('netWorthProgress').style.width = netWorthProgress + '%'; 
+    document.getElementById('debtToIncomeRatioProgress').style.width = debtToIncomeRatioProgress + '%'; 
+
+    // Sample expense data for the chart
+    const expenseData = {
+      labels: ['Rent', 'Groceries', 'Entertainment', 'Transportation'],
+      datasets: [{
+        label: 'Monthly Expenses',
+        data: [1000, 500, 300, 200],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.8)',
+          'rgba(54, 162, 235, 0.8)',
+          'rgba(255, 206, 86, 0.8)',
+          'rgba(75, 192, 192, 0.8)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    // Create the chart
+    const ctx = document.getElementById('expenseChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'pie', 
+      data: expenseData,
+      options: {}
+    });
+  </script>
+
+</body>
+</html>
